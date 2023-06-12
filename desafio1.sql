@@ -1,26 +1,26 @@
 DROP DATABASE IF EXISTS SpotifyClone;
+CREATE DATABASE IF NOT EXISTS SpotifyClone;
+DROP TABLE `SpotifyClone`.plans;
+CREATE TABLE SpotifyClone.plans(
+  plan_id INT PRIMARY KEY AUTO_INCREMENT,
+  plan VARCHAR(50),
+  plan_price DECIMAL(7, 2)
+);
 
-  CREATE DATABASE IF NOT EXISTS SpotifyClone;
+INSERT INTO SpotifyClone.plans (plan, plan_price)
+VALUES ('gratuito', 0.00),
+  ('familiar', 7.99),
+  ('universitário', 5.99),
+  ('pessoal', 6.99);
 
-  CREATE TABLE SpotifyClone.tabela1(
-      coluna1 tipo restricoes,
-      coluna2 tipo restricoes,
-      colunaN tipo restricoes,
-  ) engine = InnoDB;
+CREATE TABLE SpotifyClone.user(
+  user_id INT PRIMARY KEY AUTO_INCREMENT,
+  user_name VARCHAR(50),
+  age INT,
+  plan_type INT,
+  since DATE,
+  FOREIGN KEY (plan_type) REFERENCES plans(plan_id)
+);
 
-  CREATE TABLE SpotifyClone.tabela2(
-      coluna1 tipo restricoes,
-      coluna2 tipo restricoes,
-      colunaN tipo restricoes,
-  ) engine = InnoDB;
-
-  INSERT INTO SpotifyClone.tabela1 (coluna1, coluna2)
-  VALUES
-    ('exemplo de dados 1', 'exemplo de dados A'),
-    ('exemplo de dados 2', 'exemplo de dados B'),
-    ('exemplo de dados 3', 'exemplo de dados C');
-
-  INSERT INTO SpotifyClone.tabela2 (coluna1, coluna2)
-  VALUES
-    ('exemplo de dados 1', 'exemplo de dados X'),
-    ('exemplo de dados 2', 'exemplo de dados Y');
+INSERT INTO `SpotifyClone`.user (user_name, age, plan_type, since)
+VALUES ("Barbara Liskov", 82,1,'2019-10-20');
